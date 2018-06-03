@@ -9,7 +9,7 @@ import javax.swing.*;
 
 import javafx.scene.chart.PieChart.Data;
 
-public class Question1Panel extends Panel {
+public class Q1RecordPanel extends Panel {
 	
 	JLabel questionLabel1;
 	JLabel questionLabel2;
@@ -40,7 +40,7 @@ public class Question1Panel extends Panel {
 	ImageIcon recordImage;*/
 
 	
-    public Question1Panel(JPanel screens) {
+    public Q1RecordPanel(JPanel screens) {
         super(screens);
     }
 
@@ -109,7 +109,6 @@ public class Question1Panel extends Panel {
     
     public void shown() {
 		Variables.questionNumber = 1;
-		System.out.println(Variables.questionNumber);
     }
 
     public void setOptions() {
@@ -120,26 +119,32 @@ public class Question1Panel extends Panel {
     		 * 225 pixels between buttons on the bottom*/
     		
 		questionLabel1.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 30));
+		questionLabel1.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, questionLabel1, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, questionLabel1, this.mainY() + this.scaledY(90), SpringLayout.NORTH, this);
 		
 		questionLabel2.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 30));
+		questionLabel2.setForeground(new Color(0f, 0f, 0f, 0.2f));
 		sl.putConstraint(SpringLayout.WEST, questionLabel2, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, questionLabel2, this.mainY() + this.scaledY(125), SpringLayout.NORTH, this);
 		
 		responsesLabel.setFont(this.customFont(TextAttribute.WEIGHT_REGULAR, 14));
+		responsesLabel.setForeground(new Color(0f, 0f, 0f, 0.2f));
 		sl.putConstraint(SpringLayout.WEST, responsesLabel, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, responsesLabel, this.mainY() + this.scaledY(180), SpringLayout.NORTH, this);
         
         headerQuestion1.setFont(this.customFont(TextAttribute.WEIGHT_REGULAR, 25));
+        headerQuestion1.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, headerQuestion1, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, headerQuestion1, this.mainY(), SpringLayout.NORTH, this);
         
         headerQuestion2.setFont(this.customFont(TextAttribute.WEIGHT_REGULAR, 12));
+        headerQuestion2.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, headerQuestion2, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, headerQuestion2, this.mainY() + this.scaledY(28), SpringLayout.NORTH, this);
         
         browseLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        browseLabel.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, browseLabel, this.mainX() + this.scaledX(5), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, browseLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
         
@@ -214,7 +219,7 @@ public class Question1Panel extends Panel {
     }
 
     public void PressedB() {
-        showScreen(Panel.Q1_RECORD_PANEL);
+        showScreen(Panel.THANK_YOU_PANEL);
         
     }
 }

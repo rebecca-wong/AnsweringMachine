@@ -3,8 +3,15 @@ package Panels;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.font.TextAttribute;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Panel extends JPanel implements /*KeyListener,*/ ComponentListener {
+	
     protected JPanel screens;
     public final static int WIDTH = 860;
     public final static int HEIGHT = 575;
@@ -12,8 +19,54 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
     public final static String WELCOME_PANEL = "WELCOME_PANEL";
     public final static String TEST_PANEL = "TEST_PANEL";
     public final static String QUESTION1_PANEL = "QUESTION1_PANEL";
+    public final static String QUESTION2_PANEL = "QUESTION2_PANEL";
+    public final static String QUESTION3_PANEL = "QUESTION3_PANEL";
+    public final static String QUESTION4_PANEL = "QUESTION4_PANEL";
+    public final static String QUESTION5_PANEL = "QUESTION5_PANEL";
+    public final static String QUESTION6_PANEL = "QUESTION6_PANEL";
+    public final static String QUESTION7_PANEL = "QUESTION7_PANEL";
+    public final static String QUESTION8_PANEL = "QUESTION8_PANEL";
+    public final static String QUESTION9_PANEL = "QUESTION9_PANEL";
+    public final static String QUESTION10_PANEL = "QUESTION10_PANEL";
+    public final static String THANK_YOU_PANEL = "THANK_YOU_PANEL";
+    public final static String Q1_RECORD_PANEL = "Q1_RECORD_PANEL";
     // Add more screen names <HERE>
 
+   protected Font customFont(float style, int fontSize) {
+	   try {
+		   if (style == TextAttribute.WEIGHT_BOLD) {
+			   InputStream is = this.getClass().getResourceAsStream("/neuzeitgro-bol.ttf");
+			   Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+			   return font.deriveFont(Font.PLAIN, this.fontSize(fontSize));
+		   } else if (style == TextAttribute.WEIGHT_LIGHT) {
+			   InputStream is = this.getClass().getResourceAsStream("/neuzeitgro-lig.ttf");
+			   Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+			   return font.deriveFont(Font.PLAIN, this.fontSize(fontSize));
+		   } else {
+			   InputStream is = this.getClass().getResourceAsStream("/neuzeitgro-reg.ttf");
+			   Font font = Font.createFont(Font.TRUETYPE_FONT, is);
+			   return font.deriveFont(Font.PLAIN, this.fontSize(fontSize));
+		   } 
+	   } catch(Exception e) {
+		   e.printStackTrace();
+	   }
+	   
+	   return new Font("Helvetica Neue", Font.PLAIN, this.fontSize(fontSize));
+	   
+	   /*try {
+		    //create the font to use. Specify the size!
+			
+		Font NeuzeitGroBla = Font.createFont(Font.TRUETYPE_FONT, new File(("Fonts\\NeuzeitGro-Bla.otf")));
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		//register the font
+		ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Fonts\\NeuzeitGro-Bla.otf")));
+		} catch (IOException e) {
+		    e.printStackTrace();
+		} catch(FontFormatException e) {
+		    e.printStackTrace();
+		}*/
+    }
+    
     private final Action pressed_a = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
             PressedA();
@@ -57,6 +110,8 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
 
         this.screens = screens;
         this.gui();
+        
+        //this.customFont();
     }
 
     @Override
@@ -64,6 +119,7 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
         Component src = (Component) cEvt.getSource();
         src.requestFocusInWindow();
         src.requestFocus();
+        shown();
     }
 
     @Override
@@ -117,11 +173,11 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
     }
 
     protected int leftX () {
-        return this.scaledY(30);
+        return this.scaledY(60);
     }
 
     protected int leftY () {
-        return this.scaledY(30);
+        return this.scaledY(50);
     }
 
     protected int rightX () {
@@ -149,4 +205,5 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
     public abstract void PressedDown();
     public abstract void PressedA();
     public abstract void PressedB();
+    public abstract void shown();
 }

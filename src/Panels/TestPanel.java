@@ -33,4 +33,10 @@ public class TestPanel extends Panel {
         System.out.println("Test: B");
         showScreen(Panel.WELCOME_PANEL);
     }
+
+	@Override
+	public void shown() {
+		// TODO Auto-generated method stub
+		
+	}
 }

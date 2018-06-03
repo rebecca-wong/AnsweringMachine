@@ -1,15 +1,12 @@
 package Panels;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.font.TextAttribute;
 
 import javax.swing.*;
 
-import javafx.scene.chart.PieChart.Data;
-
-public class Question1Panel extends Panel {
+public class Question8Panel extends Panel {
 	
 	JLabel questionLabel1;
 	JLabel questionLabel2;
@@ -31,36 +28,25 @@ public class Question1Panel extends Panel {
 	ImageIcon navigateLineImage;
 	JButton recordLineButton;
 	ImageIcon recordLineImage;
-	
-	/*JButton browseButton;
-	ImageIcon browseImage;
-	JButton navigateButton;
-	ImageIcon navigateImage;
-	JButton recordButton;
-	ImageIcon recordImage;*/
 
 	
-    public Question1Panel(JPanel screens) {
+    public Question8Panel(JPanel screens) {
         super(screens);
     }
 
     public void gui() {
     	
     		///// Make labels ///////
-    		questionLabel1 = new JLabel("\"What class do I need to take before I "); 
-		questionLabel2 = new JLabel("graduate within the design major?\"");
+    		questionLabel1 = new JLabel("\"Do you like the design major or"); 
+		questionLabel2 = new JLabel("do you wish you chose a different major?\"");
 		responsesLabel = new JLabel("2 responses"); 
-		headerQuestion1 = new JLabel("Q1");
+		headerQuestion1 = new JLabel("Q8");
 		headerQuestion2 = new JLabel("OUT OF 10");
 		browseLabel = new JLabel("BROWSE");
 		navigateLabel = new JLabel("NAVIGATE");
 		recordLabel = new JLabel("RECORD");
     	
 		/////// Make Buttons /////////
-		//question 1 image
-		q1Image = new ImageIcon(this.getClass().getResource("/q1.png"));
-		questionNumberButton = new JButton();
-		questionNumberButton.setBorder(BorderFactory.createEmptyBorder());
 		
 		//up arrow button. CHANGE TO UP ARROW LATER
 		upArrowImage = new ImageIcon(this.getClass().getResource("/Arrow_Up.png"));
@@ -86,7 +72,7 @@ public class Question1Panel extends Panel {
 		recordLineImage = new ImageIcon(this.getClass().getResource("/line_2.png"));
 		recordLineButton = new JButton();
 		recordLineButton.setBorder(BorderFactory.createEmptyBorder());
-    	
+
 		
         ////////Add Components to this//////////
 		this.add(questionLabel1);
@@ -103,19 +89,16 @@ public class Question1Panel extends Panel {
 		this.add(recordLabel);
 		this.add(navigateLabel);
 		
-		
 		this.setOptions();
     }
     
     public void shown() {
-		Variables.questionNumber = 1;
-		System.out.println(Variables.questionNumber);
+		Variables.questionNumber = 8;
     }
 
     public void setOptions() {
     		SpringLayout sl = (SpringLayout) this.getLayout();
 
-    		
     		/*first line of question label is 90 + mainY and second line 35 pixels further down aka + 125
     		 * 225 pixels between buttons on the bottom*/
     		
@@ -150,9 +133,6 @@ public class Question1Panel extends Panel {
         recordLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
         sl.putConstraint(SpringLayout.WEST, recordLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
-        
-        //sl.putConstraint(SpringLayout.WEST, questionNumberButton, this.mainX(), SpringLayout.WEST, this);
-       // sl.putConstraint(SpringLayout.NORTH, questionNumberButton, this.mainY(), SpringLayout.NORTH, this);
 		
         sl.putConstraint(SpringLayout.WEST, upArrowButton, this.leftX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, upArrowButton, this.leftY(), SpringLayout.NORTH, this);
@@ -169,18 +149,14 @@ public class Question1Panel extends Panel {
         sl.putConstraint(SpringLayout.WEST, recordLineButton, this.mainX() + this.scaledX(450), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLineButton, 0, SpringLayout.SOUTH, this);
         
-		Image img = q1Image.getImage() ;  
-		Image newimg = img.getScaledInstance(this.scaledY(150), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
-		ImageIcon q1Image = new ImageIcon( newimg );
-		questionNumberButton.setIcon(q1Image);
 		
 		Image upImg = upArrowImage.getImage() ;  
-		Image newUpImg = upImg.getScaledInstance(this.scaledY(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
+		Image newUpImg = upImg.getScaledInstance(this.scaledX(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon upArrowIcon = new ImageIcon( newUpImg );
 		upArrowButton.setIcon(upArrowIcon);
 	
 		Image downImg = downArrowImage.getImage() ;  
-		Image newDownImg = downImg.getScaledInstance(this.scaledY(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
+		Image newDownImg = downImg.getScaledInstance(this.scaledX(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon downArrowIcon = new ImageIcon( newDownImg );
 		downArrowButton.setIcon(downArrowIcon);
 		
@@ -198,23 +174,23 @@ public class Question1Panel extends Panel {
 		Image newRecordImg = recordImg.getScaledInstance(this.scaledY(65), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon recordIcon = new ImageIcon( newRecordImg );
 		recordLineButton.setIcon(recordIcon);
-
     }
 
     public void PressedUp() {
-    		showScreen(Panel.WELCOME_PANEL);
+    		showScreen(Panel.QUESTION7_PANEL);
     }
 
     public void PressedDown() {
-        showScreen(Panel.QUESTION2_PANEL);
+    		showScreen(Panel.QUESTION9_PANEL);
     }
 
     public void PressedA() {
-        //go to browse screen
+        //goes to browse screen
     }
 
     public void PressedB() {
-        showScreen(Panel.Q1_RECORD_PANEL);
-        
+        //goes to recording screen
     }
 }
+
+
