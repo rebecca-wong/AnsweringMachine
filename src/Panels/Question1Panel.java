@@ -19,6 +19,9 @@ public class Question1Panel extends Panel {
 	JLabel browseLabel;
 	JLabel navigateLabel;
 	JLabel recordLabel;
+	JLabel stopLabel;
+	JLabel submitLabel;
+	JLabel deleteLabel;
 	JButton questionNumberButton;
 	ImageIcon q1Image;
 	JButton upArrowButton;
@@ -31,6 +34,12 @@ public class Question1Panel extends Panel {
 	ImageIcon navigateLineImage;
 	JButton recordLineButton;
 	ImageIcon recordLineImage;
+	JButton recordButton;
+	ImageIcon recordImage;
+	JButton stopButton;
+	ImageIcon stopImage;
+	boolean bPressed;
+	int timesbPressed;
 	
 	/*JButton browseButton;
 	ImageIcon browseImage;
@@ -55,6 +64,11 @@ public class Question1Panel extends Panel {
 		browseLabel = new JLabel("BROWSE");
 		navigateLabel = new JLabel("NAVIGATE");
 		recordLabel = new JLabel("RECORD");
+		stopLabel = new JLabel("STOP");
+		submitLabel = new JLabel("SUBMIT");
+		deleteLabel = new JLabel("DELETE");
+		bPressed = false;
+		timesbPressed = 0;
     	
 		/////// Make Buttons /////////
 		//question 1 image
@@ -87,6 +101,14 @@ public class Question1Panel extends Panel {
 		recordLineButton = new JButton();
 		recordLineButton.setBorder(BorderFactory.createEmptyBorder());
     	
+		//circle record button
+		recordImage = new ImageIcon(this.getClass().getResource("/Record_Button.png"));
+		recordButton = new JButton();
+		recordButton.setBorder(BorderFactory.createEmptyBorder());
+		
+		stopImage = new ImageIcon(this.getClass().getResource("/Stop_Button.png"));
+		stopButton = new JButton();
+		stopButton.setBorder(BorderFactory.createEmptyBorder());
 		
         ////////Add Components to this//////////
 		this.add(questionLabel1);
@@ -102,6 +124,11 @@ public class Question1Panel extends Panel {
 		this.add(browseLabel);
 		this.add(recordLabel);
 		this.add(navigateLabel);
+		this.add(stopLabel);
+		this.add(submitLabel);
+		this.add(recordButton);
+		this.add(deleteLabel);
+		this.add(stopButton);
 		
 		
 		this.setOptions();
@@ -151,6 +178,23 @@ public class Question1Panel extends Panel {
         sl.putConstraint(SpringLayout.WEST, recordLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
         
+        stopLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        stopLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, stopLabel, this.mainX() + this.scaledX(465), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, stopLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        submitLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        submitLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, submitLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, submitLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        deleteLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        deleteLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, deleteLabel, this.mainX() + this.scaledX(5), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, deleteLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        
+        
         //sl.putConstraint(SpringLayout.WEST, questionNumberButton, this.mainX(), SpringLayout.WEST, this);
        // sl.putConstraint(SpringLayout.NORTH, questionNumberButton, this.mainY(), SpringLayout.NORTH, this);
 		
@@ -168,6 +212,15 @@ public class Question1Panel extends Panel {
         
         sl.putConstraint(SpringLayout.WEST, recordLineButton, this.mainX() + this.scaledX(450), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLineButton, 0, SpringLayout.SOUTH, this);
+        
+        recordButton.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, recordButton,this.mainX() + this.scaledX(205), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.NORTH, recordButton, this.mainY() + this.scaledY(190), SpringLayout.NORTH, this);
+        
+        stopButton.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, stopButton,this.mainX() + this.scaledX(205), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.NORTH, stopButton, this.mainY() + this.scaledY(190), SpringLayout.NORTH, this);
+        
         
 		Image img = q1Image.getImage() ;  
 		Image newimg = img.getScaledInstance(this.scaledY(150), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
@@ -198,23 +251,121 @@ public class Question1Panel extends Panel {
 		Image newRecordImg = recordImg.getScaledInstance(this.scaledY(65), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon recordIcon = new ImageIcon( newRecordImg );
 		recordLineButton.setIcon(recordIcon);
-
+		
+		Image recordCircleImg = recordImage.getImage() ;  
+		Image newRecordCircleImg = recordCircleImg.getScaledInstance(this.scaledY(100), this.scaledY(100),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon recordCircleIcon = new ImageIcon( newRecordCircleImg );
+		recordButton.setIcon(recordCircleIcon);
+		
+		Image stopImg = stopImage.getImage() ;  
+		Image newStopImg = stopImg.getScaledInstance(this.scaledY(100), this.scaledY(100),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon stopIcon = new ImageIcon( newStopImg );
+		stopButton.setIcon(stopIcon);
     }
 
     public void PressedUp() {
-    		showScreen(Panel.WELCOME_PANEL);
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.WELCOME_PANEL);
+    		}
     }
 
     public void PressedDown() {
-        showScreen(Panel.QUESTION2_PANEL);
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.QUESTION2_PANEL);
+    		}
     }
 
     public void PressedA() {
-        //go to browse screen
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.BROWSEP1_1PANEL);
+    		} else {
+    			
+    			upArrowButton.setVisible(true);
+    			downArrowButton.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			navigateLineButton.setVisible(true);
+    			browseLabel.setVisible(true);
+    			navigateLabel.setVisible(true);
+    			recordLabel.setVisible(true);
+    			responsesLabel.setVisible(true);
+    			stopLabel.setVisible(false);
+    			stopButton.setVisible(false);
+    			submitLabel.setVisible(false);
+    			deleteLabel.setVisible(false);
+    			
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			
+    			showScreen(Panel.MAYBE_DELETE_PANEL);
+    			timesbPressed = 0;
+    			
+    		}
+        
     }
 
     public void PressedB() {
-        showScreen(Panel.Q1_RECORD_PANEL);
+    		//record is pressed
+    		if(timesbPressed == 0) {
+    			timesbPressed = 1;
+    			
+    			upArrowButton.setVisible(false);
+    			downArrowButton.setVisible(false);
+    			browseLineButton.setVisible(false);
+    			navigateLineButton.setVisible(false);
+    			browseLabel.setVisible(false);
+    			navigateLabel.setVisible(false);
+    			recordLabel.setVisible(false);
+    			stopLabel.setVisible(true);
+    			recordButton.setVisible(true);
+    			responsesLabel.setVisible(false);
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			
+    			//hannah's recording method
+    
+    			//stop is pressed
+    		} else if (timesbPressed == 1) {
+    			timesbPressed = 2;
+    			
+    			stopLabel.setVisible(false);
+    			deleteLabel.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			recordButton.setVisible(false);
+    			stopButton.setVisible(true);
+    			submitLabel.setVisible(true);
+    			
+    			
+    			//submit is pressed
+    		} else if (timesbPressed == 2) {
+    			timesbPressed = 0;
+    			
+    			upArrowButton.setVisible(true);
+    			downArrowButton.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			navigateLineButton.setVisible(true);
+    			browseLabel.setVisible(true);
+    			navigateLabel.setVisible(true);
+    			recordLabel.setVisible(true);
+    			responsesLabel.setVisible(true);
+    			stopLabel.setVisible(false);
+    			stopButton.setVisible(false);
+    			submitLabel.setVisible(false);
+    			deleteLabel.setVisible(false);
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			
+    			showScreen(Panel.THANK_YOU_PANEL);
+    		}
+        //showScreen(Panel.Q1_RECORD_PANEL);
         
     }
 }

@@ -1,10 +1,13 @@
 package Panels;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.font.TextAttribute;
 
 import javax.swing.*;
+
+import javafx.scene.chart.PieChart.Data;
 
 public class Question4Panel extends Panel {
 	
@@ -16,6 +19,9 @@ public class Question4Panel extends Panel {
 	JLabel browseLabel;
 	JLabel navigateLabel;
 	JLabel recordLabel;
+	JLabel stopLabel;
+	JLabel submitLabel;
+	JLabel deleteLabel;
 	JButton questionNumberButton;
 	ImageIcon q1Image;
 	JButton upArrowButton;
@@ -28,6 +34,19 @@ public class Question4Panel extends Panel {
 	ImageIcon navigateLineImage;
 	JButton recordLineButton;
 	ImageIcon recordLineImage;
+	JButton recordButton;
+	ImageIcon recordImage;
+	JButton stopButton;
+	ImageIcon stopImage;
+	boolean bPressed;
+	int timesbPressed;
+	
+	/*JButton browseButton;
+	ImageIcon browseImage;
+	JButton navigateButton;
+	ImageIcon navigateImage;
+	JButton recordButton;
+	ImageIcon recordImage;*/
 
 	
     public Question4Panel(JPanel screens) {
@@ -37,16 +56,25 @@ public class Question4Panel extends Panel {
     public void gui() {
     	
     		///// Make labels ///////
-    		questionLabel1 = new JLabel("\"What advice do you have for someone"); 
-		questionLabel2 = new JLabel("trying to chose between all the design majors?\"");
+    		questionLabel1 = new JLabel("\"What advice do you have for someone trying to"); 
+		questionLabel2 = new JLabel("decide between all the design majors?\"");
 		responsesLabel = new JLabel("3 responses"); 
 		headerQuestion1 = new JLabel("Q4");
 		headerQuestion2 = new JLabel("OUT OF 10");
 		browseLabel = new JLabel("BROWSE");
 		navigateLabel = new JLabel("NAVIGATE");
 		recordLabel = new JLabel("RECORD");
+		stopLabel = new JLabel("STOP");
+		submitLabel = new JLabel("SUBMIT");
+		deleteLabel = new JLabel("DELETE");
+		bPressed = false;
+		timesbPressed = 0;
     	
 		/////// Make Buttons /////////
+		//question 1 image
+		q1Image = new ImageIcon(this.getClass().getResource("/q1.png"));
+		questionNumberButton = new JButton();
+		questionNumberButton.setBorder(BorderFactory.createEmptyBorder());
 		
 		//up arrow button. CHANGE TO UP ARROW LATER
 		upArrowImage = new ImageIcon(this.getClass().getResource("/Arrow_Up.png"));
@@ -72,7 +100,15 @@ public class Question4Panel extends Panel {
 		recordLineImage = new ImageIcon(this.getClass().getResource("/line_2.png"));
 		recordLineButton = new JButton();
 		recordLineButton.setBorder(BorderFactory.createEmptyBorder());
-
+    	
+		//circle record button
+		recordImage = new ImageIcon(this.getClass().getResource("/Record_Button.png"));
+		recordButton = new JButton();
+		recordButton.setBorder(BorderFactory.createEmptyBorder());
+		
+		stopImage = new ImageIcon(this.getClass().getResource("/Stop_Button.png"));
+		stopButton = new JButton();
+		stopButton.setBorder(BorderFactory.createEmptyBorder());
 		
         ////////Add Components to this//////////
 		this.add(questionLabel1);
@@ -88,16 +124,24 @@ public class Question4Panel extends Panel {
 		this.add(browseLabel);
 		this.add(recordLabel);
 		this.add(navigateLabel);
+		this.add(stopLabel);
+		this.add(submitLabel);
+		this.add(recordButton);
+		this.add(deleteLabel);
+		this.add(stopButton);
+		
 		
 		this.setOptions();
     }
-
+    
     public void shown() {
 		Variables.questionNumber = 4;
+		System.out.println(Variables.questionNumber);
     }
-    
+
     public void setOptions() {
     		SpringLayout sl = (SpringLayout) this.getLayout();
+
     		
     		/*first line of question label is 90 + mainY and second line 35 pixels further down aka + 125
     		 * 225 pixels between buttons on the bottom*/
@@ -133,6 +177,26 @@ public class Question4Panel extends Panel {
         recordLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
         sl.putConstraint(SpringLayout.WEST, recordLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        stopLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        stopLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, stopLabel, this.mainX() + this.scaledX(465), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, stopLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        submitLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        submitLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, submitLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, submitLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        deleteLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        deleteLabel.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, deleteLabel, this.mainX() + this.scaledX(5), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, deleteLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        
+        
+        
+        //sl.putConstraint(SpringLayout.WEST, questionNumberButton, this.mainX(), SpringLayout.WEST, this);
+       // sl.putConstraint(SpringLayout.NORTH, questionNumberButton, this.mainY(), SpringLayout.NORTH, this);
 		
         sl.putConstraint(SpringLayout.WEST, upArrowButton, this.leftX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, upArrowButton, this.leftY(), SpringLayout.NORTH, this);
@@ -149,14 +213,27 @@ public class Question4Panel extends Panel {
         sl.putConstraint(SpringLayout.WEST, recordLineButton, this.mainX() + this.scaledX(450), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLineButton, 0, SpringLayout.SOUTH, this);
         
+        recordButton.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, recordButton,this.mainX() + this.scaledX(205), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.NORTH, recordButton, this.mainY() + this.scaledY(190), SpringLayout.NORTH, this);
+        
+        stopButton.setVisible(false);
+        sl.putConstraint(SpringLayout.WEST, stopButton,this.mainX() + this.scaledX(205), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.NORTH, stopButton, this.mainY() + this.scaledY(190), SpringLayout.NORTH, this);
+        
+        
+		Image img = q1Image.getImage() ;  
+		Image newimg = img.getScaledInstance(this.scaledY(150), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon q1Image = new ImageIcon( newimg );
+		questionNumberButton.setIcon(q1Image);
 		
 		Image upImg = upArrowImage.getImage() ;  
-		Image newUpImg = upImg.getScaledInstance(this.scaledX(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
+		Image newUpImg = upImg.getScaledInstance(this.scaledY(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon upArrowIcon = new ImageIcon( newUpImg );
 		upArrowButton.setIcon(upArrowIcon);
 	
 		Image downImg = downArrowImage.getImage() ;  
-		Image newDownImg = downImg.getScaledInstance(this.scaledX(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
+		Image newDownImg = downImg.getScaledInstance(this.scaledY(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon downArrowIcon = new ImageIcon( newDownImg );
 		downArrowButton.setIcon(downArrowIcon);
 		
@@ -174,24 +251,121 @@ public class Question4Panel extends Panel {
 		Image newRecordImg = recordImg.getScaledInstance(this.scaledY(65), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon recordIcon = new ImageIcon( newRecordImg );
 		recordLineButton.setIcon(recordIcon);
+		
+		Image recordCircleImg = recordImage.getImage() ;  
+		Image newRecordCircleImg = recordCircleImg.getScaledInstance(this.scaledY(100), this.scaledY(100),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon recordCircleIcon = new ImageIcon( newRecordCircleImg );
+		recordButton.setIcon(recordCircleIcon);
+		
+		Image stopImg = stopImage.getImage() ;  
+		Image newStopImg = stopImg.getScaledInstance(this.scaledY(100), this.scaledY(100),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon stopIcon = new ImageIcon( newStopImg );
+		stopButton.setIcon(stopIcon);
     }
 
     public void PressedUp() {
-    		showScreen(Panel.QUESTION3_PANEL);
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.QUESTION3_PANEL);
+    		}
     }
 
     public void PressedDown() {
-    		showScreen(Panel.QUESTION5_PANEL);
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.QUESTION5_PANEL);
+    		}
     }
 
     public void PressedA() {
-        //goes to browse screen
+    		if(timesbPressed == 0) {
+    			showScreen(Panel.BROWSEP1_1PANEL);
+    		} else {
+    			
+    			upArrowButton.setVisible(true);
+    			downArrowButton.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			navigateLineButton.setVisible(true);
+    			browseLabel.setVisible(true);
+    			navigateLabel.setVisible(true);
+    			recordLabel.setVisible(true);
+    			responsesLabel.setVisible(true);
+    			stopLabel.setVisible(false);
+    			stopButton.setVisible(false);
+    			submitLabel.setVisible(false);
+    			deleteLabel.setVisible(false);
+    			
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			
+    			showScreen(Panel.MAYBE_DELETE_PANEL);
+    			timesbPressed = 0;
+    			
+    		}
+        
     }
 
     public void PressedB() {
-        //goes to recording screen
+    		//record is pressed
+    		if(timesbPressed == 0) {
+    			timesbPressed = 1;
+    			
+    			upArrowButton.setVisible(false);
+    			downArrowButton.setVisible(false);
+    			browseLineButton.setVisible(false);
+    			navigateLineButton.setVisible(false);
+    			browseLabel.setVisible(false);
+    			navigateLabel.setVisible(false);
+    			recordLabel.setVisible(false);
+    			stopLabel.setVisible(true);
+    			recordButton.setVisible(true);
+    			responsesLabel.setVisible(false);
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 0.2f));
+    			
+    			//hannah's recording method
+    
+    			//stop is pressed
+    		} else if (timesbPressed == 1) {
+    			timesbPressed = 2;
+    			
+    			stopLabel.setVisible(false);
+    			deleteLabel.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			recordButton.setVisible(false);
+    			stopButton.setVisible(true);
+    			submitLabel.setVisible(true);
+    			
+    			
+    			//submit is pressed
+    		} else if (timesbPressed == 2) {
+    			timesbPressed = 0;
+    			
+    			upArrowButton.setVisible(true);
+    			downArrowButton.setVisible(true);
+    			browseLineButton.setVisible(true);
+    			navigateLineButton.setVisible(true);
+    			browseLabel.setVisible(true);
+    			navigateLabel.setVisible(true);
+    			recordLabel.setVisible(true);
+    			responsesLabel.setVisible(true);
+    			stopLabel.setVisible(false);
+    			stopButton.setVisible(false);
+    			submitLabel.setVisible(false);
+    			deleteLabel.setVisible(false);
+    			
+    			headerQuestion1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			headerQuestion2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel1.setForeground(new Color(0f, 0f, 0f, 1f));
+    			questionLabel2.setForeground(new Color(0f, 0f, 0f, 1f));
+    			
+    			showScreen(Panel.THANK_YOU_PANEL);
+    		}
+        //showScreen(Panel.Q1_RECORD_PANEL);
+        
     }
-
-
 }
-

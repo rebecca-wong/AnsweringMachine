@@ -81,7 +81,6 @@ public class WelcomePanel extends Panel {
     }
 
     public void PressedUp() {
-        showScreen(Panel.THANK_YOU_PANEL);
     }
 
     public void PressedDown() {
@@ -90,7 +89,6 @@ public class WelcomePanel extends Panel {
 
     public void PressedA() {
         System.out.println("Welcome: A");
-        showScreen(Panel.TEST_PANEL);
     }
 
     public void PressedB() {

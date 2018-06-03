@@ -13,31 +13,32 @@ public class Q1RecordPanel extends Panel {
 	
 	JLabel questionLabel1;
 	JLabel questionLabel2;
-	JLabel responsesLabel;
 	JLabel headerQuestion1;
 	JLabel headerQuestion2;
-	JLabel browseLabel;
-	JLabel navigateLabel;
-	JLabel recordLabel;
+	/*JLabel browseLabel;
+	JLabel navigateLabel;*/
+	JLabel stopLabel;
 	JButton questionNumberButton;
 	ImageIcon q1Image;
-	JButton upArrowButton;
+	/*JButton upArrowButton;
 	ImageIcon upArrowImage;
 	JButton downArrowButton;
 	ImageIcon downArrowImage;
 	JButton browseLineButton;
 	ImageIcon browseLineImage;
 	JButton navigateLineButton;
-	ImageIcon navigateLineImage;
+	ImageIcon navigateLineImage;*/
 	JButton recordLineButton;
 	ImageIcon recordLineImage;
-	
+	JButton recordButton;
+	ImageIcon recordImage;
 	/*JButton browseButton;
 	ImageIcon browseImage;
 	JButton navigateButton;
 	ImageIcon navigateImage;
 	JButton recordButton;
 	ImageIcon recordImage;*/
+	//String[] line1ofq = {"\"What class do I need to take before I ", "\"Who was your favorite professor"};
 
 	
     public Q1RecordPanel(JPanel screens) {
@@ -47,14 +48,14 @@ public class Q1RecordPanel extends Panel {
     public void gui() {
     	
     		///// Make labels ///////
+    	 //System.out.println(Variables.questionNumber+1);
     		questionLabel1 = new JLabel("\"What class do I need to take before I "); 
 		questionLabel2 = new JLabel("graduate within the design major?\"");
-		responsesLabel = new JLabel("2 responses"); 
 		headerQuestion1 = new JLabel("Q1");
 		headerQuestion2 = new JLabel("OUT OF 10");
-		browseLabel = new JLabel("BROWSE");
-		navigateLabel = new JLabel("NAVIGATE");
-		recordLabel = new JLabel("RECORD");
+		/*browseLabel = new JLabel("BROWSE");
+		navigateLabel = new JLabel("NAVIGATE");*/
+		stopLabel = new JLabel("STOP");
     	
 		/////// Make Buttons /////////
 		//question 1 image
@@ -63,7 +64,7 @@ public class Q1RecordPanel extends Panel {
 		questionNumberButton.setBorder(BorderFactory.createEmptyBorder());
 		
 		//up arrow button. CHANGE TO UP ARROW LATER
-		upArrowImage = new ImageIcon(this.getClass().getResource("/Arrow_Up.png"));
+		/*upArrowImage = new ImageIcon(this.getClass().getResource("/Arrow_Up.png"));
 		upArrowButton = new JButton();
 		upArrowButton.setBorder(BorderFactory.createEmptyBorder());
 		
@@ -80,28 +81,31 @@ public class Q1RecordPanel extends Panel {
 		//Navigate button
 		navigateLineImage = new ImageIcon(this.getClass().getResource("/line_2.png"));
 		navigateLineButton = new JButton();
-		navigateLineButton.setBorder(BorderFactory.createEmptyBorder());
+		navigateLineButton.setBorder(BorderFactory.createEmptyBorder());*/
 		
 		//Record button 
 		recordLineImage = new ImageIcon(this.getClass().getResource("/line_2.png"));
 		recordLineButton = new JButton();
 		recordLineButton.setBorder(BorderFactory.createEmptyBorder());
     	
+		recordImage = new ImageIcon(this.getClass().getResource("/Record_Button.png"));
+		recordButton = new JButton();
+		recordButton.setBorder(BorderFactory.createEmptyBorder());
 		
         ////////Add Components to this//////////
 		this.add(questionLabel1);
 		this.add(questionLabel2);
-		this.add(responsesLabel);
-		this.add(upArrowButton);
+		/*this.add(upArrowButton);
 		this.add(downArrowButton);
 		this.add(browseLineButton);
-		this.add(navigateLineButton);
+		this.add(navigateLineButton);*/
 		this.add(recordLineButton);
 		this.add(headerQuestion1);
 		this.add(headerQuestion2);
-		this.add(browseLabel);
-		this.add(recordLabel);
-		this.add(navigateLabel);
+		this.add(stopLabel);
+		this.add(recordButton);
+		/*this.add(browseLabel);
+		this.add(navigateLabel);*/
 		
 		
 		this.setOptions();
@@ -127,11 +131,6 @@ public class Q1RecordPanel extends Panel {
 		questionLabel2.setForeground(new Color(0f, 0f, 0f, 0.2f));
 		sl.putConstraint(SpringLayout.WEST, questionLabel2, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, questionLabel2, this.mainY() + this.scaledY(125), SpringLayout.NORTH, this);
-		
-		responsesLabel.setFont(this.customFont(TextAttribute.WEIGHT_REGULAR, 14));
-		responsesLabel.setForeground(new Color(0f, 0f, 0f, 0.2f));
-		sl.putConstraint(SpringLayout.WEST, responsesLabel, this.mainX(), SpringLayout.WEST, this);
-        sl.putConstraint(SpringLayout.NORTH, responsesLabel, this.mainY() + this.scaledY(180), SpringLayout.NORTH, this);
         
         headerQuestion1.setFont(this.customFont(TextAttribute.WEIGHT_REGULAR, 25));
         headerQuestion1.setForeground(new Color(0f, 0f, 0f, 0.2f));
@@ -143,43 +142,52 @@ public class Q1RecordPanel extends Panel {
         sl.putConstraint(SpringLayout.WEST, headerQuestion2, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, headerQuestion2, this.mainY() + this.scaledY(28), SpringLayout.NORTH, this);
         
-        browseLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        /*browseLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
         browseLabel.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, browseLabel, this.mainX() + this.scaledX(5), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, browseLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
         
         navigateLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        navigateLabel.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, navigateLabel, this.mainX() + this.scaledX(227), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, navigateLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
-        
-        recordLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
-        sl.putConstraint(SpringLayout.WEST, recordLabel, this.mainX() + this.scaledX(455), SpringLayout.WEST, this);
-        sl.putConstraint(SpringLayout.SOUTH, recordLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
+        */
+        stopLabel.setFont(this.customFont(TextAttribute.WEIGHT_BOLD, 15));
+        sl.putConstraint(SpringLayout.WEST, stopLabel, this.mainX() + this.scaledX(463), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.SOUTH, stopLabel, this.mainY() + this.scaledY(475), SpringLayout.NORTH, this);
         
         //sl.putConstraint(SpringLayout.WEST, questionNumberButton, this.mainX(), SpringLayout.WEST, this);
        // sl.putConstraint(SpringLayout.NORTH, questionNumberButton, this.mainY(), SpringLayout.NORTH, this);
 		
+        /*upArrowButton.setOpaque(false);
+        upArrowButton.setFocusPainted(false);
         sl.putConstraint(SpringLayout.WEST, upArrowButton, this.leftX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, upArrowButton, this.leftY(), SpringLayout.NORTH, this);
         
+        downArrowButton.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, downArrowButton, this.leftX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.NORTH, downArrowButton, this.leftY() + this.scaledY(400), SpringLayout.NORTH, this);
         
+        browseLineButton.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, browseLineButton, this.mainX(), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, browseLineButton, 0, SpringLayout.SOUTH, this);
         
+        navigateLineButton.setForeground(new Color(0f, 0f, 0f, 0.2f));
         sl.putConstraint(SpringLayout.WEST, navigateLineButton, this.mainX() + this.scaledX(225), SpringLayout.WEST, this);
-        sl.putConstraint(SpringLayout.SOUTH, navigateLineButton, 0, SpringLayout.SOUTH, this);
+        sl.putConstraint(SpringLayout.SOUTH, navigateLineButton, 0, SpringLayout.SOUTH, this);*/
         
         sl.putConstraint(SpringLayout.WEST, recordLineButton, this.mainX() + this.scaledX(450), SpringLayout.WEST, this);
         sl.putConstraint(SpringLayout.SOUTH, recordLineButton, 0, SpringLayout.SOUTH, this);
+        
+        sl.putConstraint(SpringLayout.WEST, recordButton,this.mainX() + this.scaledX(205), SpringLayout.WEST, this);
+        sl.putConstraint(SpringLayout.NORTH, recordButton, this.mainY() + this.scaledY(190), SpringLayout.NORTH, this);
         
 		Image img = q1Image.getImage() ;  
 		Image newimg = img.getScaledInstance(this.scaledY(150), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon q1Image = new ImageIcon( newimg );
 		questionNumberButton.setIcon(q1Image);
 		
-		Image upImg = upArrowImage.getImage() ;  
+		/*Image upImg = upArrowImage.getImage() ;  
 		Image newUpImg = upImg.getScaledInstance(this.scaledY(20), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon upArrowIcon = new ImageIcon( newUpImg );
 		upArrowButton.setIcon(upArrowIcon);
@@ -197,21 +205,24 @@ public class Q1RecordPanel extends Panel {
 		Image navigateImg = navigateLineImage.getImage() ;  
 		Image newNavigateImg = navigateImg.getScaledInstance(this.scaledY(65), this.scaledY(50), java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon navigateIcon = new ImageIcon( newNavigateImg);
-		navigateLineButton.setIcon(navigateIcon);
+		navigateLineButton.setIcon(navigateIcon);*/
 		
 		Image recordImg = recordLineImage.getImage() ;  
 		Image newRecordImg = recordImg.getScaledInstance(this.scaledY(65), this.scaledY(50),  java.awt.Image.SCALE_SMOOTH ) ;  
 		ImageIcon recordIcon = new ImageIcon( newRecordImg );
 		recordLineButton.setIcon(recordIcon);
+		
+		Image recordCircleImg = recordImage.getImage() ;  
+		Image newRecordCircleImg = recordCircleImg.getScaledInstance(this.scaledY(100), this.scaledY(100),  java.awt.Image.SCALE_SMOOTH ) ;  
+		ImageIcon recordCircleIcon = new ImageIcon( newRecordCircleImg );
+		recordButton.setIcon(recordCircleIcon);
 
     }
 
     public void PressedUp() {
-    		showScreen(Panel.WELCOME_PANEL);
     }
 
     public void PressedDown() {
-        showScreen(Panel.QUESTION2_PANEL);
     }
 
     public void PressedA() {
@@ -219,7 +230,7 @@ public class Q1RecordPanel extends Panel {
     }
 
     public void PressedB() {
-        showScreen(Panel.THANK_YOU_PANEL);
+        showScreen(Panel.Q1_STOPPED_RECORD_PANEL);
         
     }
 }

@@ -30,6 +30,29 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
     public final static String QUESTION10_PANEL = "QUESTION10_PANEL";
     public final static String THANK_YOU_PANEL = "THANK_YOU_PANEL";
     public final static String Q1_RECORD_PANEL = "Q1_RECORD_PANEL";
+    public final static String Q1_STOPPED_RECORD_PANEL = "Q1_STOPPED_RECORD_PANEL";
+    public final static String MAYBE_DELETE_PANEL = "MAYBE_DELETE_PANEL";
+    public final static String DELETED_PANEL = "DELETED_PANEL";
+    public final static String BROWSEP1_1PANEL = "BROWSEP1_1PANEL";
+    public final static String BROWSEP1_2PANEL = "BROWSEP1_2PANEL";
+    public final static String BROWSEP1_3PANEL = "BROWSEP1_3PANEL";
+    public final static String BROWSEP2_1PANEL = "BROWSEP2_1PANEL";
+    public final static String BROWSEP2_2PANEL = "BROWSEP2_2PANEL";
+    public final static String BROWSEP2_3PANEL = "BROWSEP2_3PANEL";
+    public final static String BROWSEP3_1PANEL = "BROWSEP3_1PANEL";
+    public final static String BROWSEP3_2PANEL = "BROWSEP3_2PANEL";
+    public final static String BROWSEP3_3PANEL = "BROWSEP3_3PANEL";
+    public final static String BROWSEP4_1PANEL = "BROWSEP4_1PANEL";
+    public final static String LISTENQ1_1PANEL = "LISTENQ1_1PANEL";
+    public final static String LISTENQ2_PANEL = "LISTENQ2_PANEL";
+    public final static String LISTENQ3_PANEL = "LISTENQ3_PANEL";
+    public final static String LISTENQ4_PANEL = "LISTENQ4_PANEL";
+    public final static String LISTENQ5_PANEL = "LISTENQ5_PANEL";
+    public final static String LISTENQ6_PANEL = "LISTENQ6_PANEL";
+    public final static String LISTENQ7_PANEL = "LISTENQ7_PANEL";
+    public final static String LISTENQ8_PANEL = "LISTENQ8_PANEL";
+    public final static String LISTENQ9_PANEL = "LISTENQ9_PANEL";
+    public final static String LISTENQ10_PANEL = "LISTENQ10_PANEL";
     // Add more screen names <HERE>
 
    protected Font customFont(float style, int fontSize) {
@@ -181,11 +204,11 @@ public abstract class Panel extends JPanel implements /*KeyListener,*/ Component
     }
 
     protected int rightX () {
-        return this.scaledY(30);
+        return this.scaledY(60);
     }
 
     protected int rightY () {
-        return this.scaledY(30);
+        return this.scaledY(50);
     }
 
     protected int fontSize (int fs) {
